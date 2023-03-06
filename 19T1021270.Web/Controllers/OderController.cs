@@ -1,13 +1,13 @@
 ﻿using _19T1021270.BusinessLayers;
-using LiteCommerce.BusinessLayer;
-using LiteCommerce.DomainModel;
+using _19T1021270.BusinessLayer;
+using _19T1021270.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace LiteCommerce.Web.Controllers
+namespace _19T1021270.Web.Controllers
 {
     /// <summary>
     /// 

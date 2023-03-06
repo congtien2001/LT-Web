@@ -1,11 +1,11 @@
-﻿using _19T1021270.DomainModel;
+﻿using _19T1021270.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LiteCommerce.DomainModel
+namespace _19T1021270.DomainModels
 {
     /// <summary>
     /// Đơn hàng

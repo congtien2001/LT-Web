@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LiteCommerce.DataLayer;
-using LiteCommerce.DomainModel;
+using _19T1021270.DataLayers;
+using _19T1021270.DomainModels;
 using System.Configuration;
 
-namespace LiteCommerce.BusinessLayer
+namespace _19T1021270.BusinessLayers
 {
     /// <summary>
     /// Các chức năng nghiệp vụ liên quan đến xử lý đơn hàng
@@ -21,7 +21,7 @@ namespace LiteCommerce.BusinessLayer
         static OrderService()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
-            orderDB = new DataLayer.SQLServer.OrderDAL(connectionString);
+            orderDB = new DataLayers.SQLServer.OrderDAL(connectionString);
         }
         /// <summary>
         /// 

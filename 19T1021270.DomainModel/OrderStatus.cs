@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LiteCommerce.DomainModel
+namespace _19T1021270.DomainModels
 {
     /// <summary>
     /// Định nghĩa các hằng trạng thái đơn hàng
