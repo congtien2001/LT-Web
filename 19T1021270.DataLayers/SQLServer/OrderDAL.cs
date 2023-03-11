@@ -1,5 +1,4 @@
-﻿using _19T1021270.DataLayers.SQLServer;
-using _19T1021270.DataLayers;
+﻿using _19T1021270.DataLayers;
 using _19T1021270.DomainModels;
 using System;
 using System.Collections.Generic;
@@ -8,9 +7,6 @@ using System.Data.SqlClient;
 
 namespace _19T1021270.DataLayers.SQLServer
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class OrderDAL : _BaseDAL, IOrderDAL
     {
         /// <summary>
@@ -140,7 +136,7 @@ namespace _19T1021270.DataLayers.SQLServer
                                             LEFT JOIN Customers AS c ON o.CustomerID = c.CustomerID
                                             LEFT JOIN Employees AS e ON o.EmployeeID = e.EmployeeID
                                             LEFT JOIN Shippers AS s ON o.ShipperID = s.ShipperID
-                                    WHERE   (@Status = -99 OR o.Status = @Status)
+                                    WHERE   (@Status = 0 OR o.Status = @Status)
                                         AND (@SearchValue = N'' OR c.CustomerName LIKE @SearchValue OR s.ShipperName LIKE @SearchValue)";
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.AddWithValue("@Status", status);
@@ -251,7 +247,7 @@ namespace _19T1021270.DataLayers.SQLServer
                 cmd.CommandText = @"SELECT	od.*, p.ProductName, p.Unit, p.Photo		
                                     FROM	OrderDetails AS od
 		                                    JOIN Products AS p ON od.ProductID = p.ProductID
-                                    WHERE	od.OrderID = @OrderID AND ProductID = @ProductID";
+                                    WHERE	od.OrderID = @OrderID AND p.ProductID = @ProductID";
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.AddWithValue("@OrderID", orderID);
                 cmd.Parameters.AddWithValue("@ProductID", productID);
@@ -430,6 +426,34 @@ namespace _19T1021270.DataLayers.SQLServer
                 connection.Close();
             }
             return result;
+        }
+
+        public IList<StatusOrder> ListOfStatus()
+        {
+            List<StatusOrder> data = new List<StatusOrder>();
+
+            using (var connection = OpenConnection())
+            {
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = @"SELECT * FROM OrderStatus";
+                cmd.CommandType = CommandType.Text;
+
+                using (var dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                {
+                    while (dbReader.Read())
+                    {
+                        data.Add(new StatusOrder()
+                        {
+                            Status = Convert.ToInt32(dbReader["Status"]),
+                            Description = Convert.ToString(dbReader["Description"]),
+                        });
+                    }
+                    dbReader.Close();
+                }
+
+                connection.Close();
+            }
+            return data;
         }
     }
 }

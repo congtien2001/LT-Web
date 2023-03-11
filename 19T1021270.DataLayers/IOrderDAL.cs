@@ -82,5 +82,10 @@ namespace _19T1021270.DataLayers
         /// <param name="productID"></param>
         /// <returns></returns>
         bool DeleteDetail(int orderID, int productID);
+        /// <summary>
+        /// Lấy danh sách trạng thái đơn hàng
+        /// </summary>
+        /// <returns></returns>
+        IList<StatusOrder> ListOfStatus();
     }
 }
